@@ -1,0 +1,10 @@
+# Pastas e arquivos de usuário/sessão do RStudio
+.Rproj.user/
+.Rhistory
+.RData
+.RuserData
+*.RDataTmp
+
+# Arquivos de sistema operacional (opcional)
+.DS_Store
+Thumbs.db
