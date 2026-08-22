@@ -1,0 +1,143 @@
+---
+title: "Aula 3 - R Markdown"
+author: "Jader Santos"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    theme: cerulean
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Questão 3 - Tempo de Sessão dos Usuários
+
+Nesta questão, simulamos o tempo de sessão (em minutos) de 20 usuários, com valores
+distribuídos uniformemente entre 5 e 120 minutos.
+
+### a) Geração dos dados e medidas descritivas
+
+```{r}
+set.seed(123)
+tempo_sessao <- round(
+  runif(20, min = 5, max = 120),
+  digits = 1
+)
+tempo_sessao
+```
+
+Principais medidas de posição e dispersão:
+
+```{r}
+min(tempo_sessao)
+max(tempo_sessao)
+mean(tempo_sessao)
+median(tempo_sessao)
+var(tempo_sessao)
+sd(tempo_sessao)
+range(tempo_sessao)
+summary(tempo_sessao)
+```
+
+A média aritmética é calculada como:
+
+$$
+\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i
+$$
+
+onde $n = 20$ e $x_i$ representa o tempo de sessão do $i$-ésimo usuário.
+
+A variância amostral é dada por:
+
+$$
+s^2 = \frac{1}{n-1}\sum_{i=1}^{n} (x_i - \bar{x})^2
+$$
+
+e o desvio padrão é a raiz quadrada da variância:
+
+$$
+s = \sqrt{s^2}
+$$
+
+### b) Interpretação da média
+
+A média aritmética representa o valor central dos 20 tempos de sessão simulados,
+todos compreendidos entre 5 e 120 minutos, armazenados no vetor `tempo_sessao`.
+
+---
+
+## Questão 7 - Análise de Vendas
+
+Aqui simulamos 30 valores de vendas, com distribuição uniforme entre R\$ 50,00 e
+R\$ 1.000,00.
+
+```{r}
+set.seed(2026)
+vendas <- round(
+  runif(30, min = 50, max = 1000),
+  digits = 2
+)
+vendas
+```
+
+### a) Valor máximo de venda
+
+```{r}
+max(vendas)
+```
+
+### b) Valor mínimo de venda
+
+```{r}
+min(vendas)
+```
+
+### c) Soma total das vendas
+
+$$
+\text{Total} = \sum_{i=1}^{30} \text{vendas}_i
+$$
+
+```{r}
+sum(vendas)
+```
+
+### d) Média das vendas
+
+$$
+\bar{x}_{vendas} = \frac{1}{30}\sum_{i=1}^{30} \text{vendas}_i
+$$
+
+```{r}
+vendas_media <- round(mean(vendas), 2)
+vendas_media
+```
+
+### e) Quantidade de vendas acima da média
+
+```{r}
+vendas_acima_media <- vendas > vendas_media
+sum(vendas_acima_media)
+```
+
+### f) Top 5 maiores vendas
+
+```{r}
+sort(vendas, decreasing = TRUE)[1:5]
+```
+
+### g) Posição da maior venda no vetor original
+
+```{r}
+order(vendas, decreasing = TRUE)[1]
+```
+
+### h) Classificação das vendas em relação à média
+
+```{r}
+classificacao <- rep("abaixo_ou_igual_media", length(vendas))
+classificacao[vendas > mean(vendas)] <- "acima_da_media"
+freq_classificacao <- table(classificacao)
+freq_classificacao
+```
